@@ -3,7 +3,7 @@ import "bootstrap/dist/css/bootstrap.min.css";
 import "./Schedule.css";
 
 const ScheduleForm = () => {
-  const [showForm, setShowForm] = useState(false);
+  const [showModal, setShowModal] = useState(false);
   const [showFields, setShowFields] = useState(false);
   const [scheduleList, setScheduleList] = useState([]);
 
@@ -28,7 +28,7 @@ const ScheduleForm = () => {
   const handleSubmit = (e) => {
     e.preventDefault();
     setScheduleList([{ ...formData, isActive: false }, ...scheduleList]);
-    setShowForm(false);
+    setShowModal(false);
     setShowFields(false);
     setFormData({
       date: "",
@@ -52,114 +52,117 @@ const ScheduleForm = () => {
 
   return (
     <div className="schedule-container">
-     <div className="schedule-button-container">
-  <button
-    className="btn btn-primary schedule-button"
-    onClick={() => setShowForm(true)}
-  >
-    Add Schedule
-  </button>
-</div>
+      <div className="schedule-button-container">
+        <button
+          className="btn btn-primary schedule-button"
+          onClick={() => setShowModal(true)}
+        >
+          Add Schedule
+        </button>
+      </div>
 
-
-      {showForm && (
-        <div className="schedule-form-container">
-          <form className="schedule-form" onSubmit={handleSubmit}>
-            <div className="row">
-              <div className="col-md-12">
-                <label>Date:</label>
-                <input
-                  type="date"
-                  name="date"
-                  className="form-control"
-                  value={formData.date}
-                  onChange={handleDateChange}
-                  required
-                />
+      {/* Modal */}
+      {showModal && (
+        <div className="modal-overlay">
+          <div className="modal-content">
+            <h4 className="text-center">Add Schedule</h4>
+            <form className="schedule-form" onSubmit={handleSubmit}>
+              <div className="row">
+                <div className="col-md-12">
+                  <label>Date:</label>
+                  <input
+                    type="date"
+                    name="date"
+                    className="form-control"
+                    value={formData.date}
+                    onChange={handleDateChange}
+                    required
+                  />
+                </div>
               </div>
-            </div>
 
-            {showFields && (
-              <>
-                <div className="row">
-                  <div className="col-md-6">
-                    <label>Teacher Name:</label>
-                    <input
-                      type="text"
-                      name="teacherName"
-                      className="form-control"
-                      value={formData.teacherName}
-                      onChange={handleChange}
-                      required
-                    />
+              {showFields && (
+                <>
+                  <div className="row">
+                    <div className="col-md-6">
+                      <label>Teacher Name:</label>
+                      <input
+                        type="text"
+                        name="teacherName"
+                        className="form-control"
+                        value={formData.teacherName}
+                        onChange={handleChange}
+                        required
+                      />
+                    </div>
+                    <div className="col-md-6">
+                      <label>Subject Name:</label>
+                      <input
+                        type="text"
+                        name="subjectName"
+                        className="form-control"
+                        value={formData.subjectName}
+                        onChange={handleChange}
+                        required
+                      />
+                    </div>
                   </div>
-                  <div className="col-md-6">
-                    <label>Subject Name:</label>
-                    <input
-                      type="text"
-                      name="subjectName"
-                      className="form-control"
-                      value={formData.subjectName}
-                      onChange={handleChange}
-                      required
-                    />
-                  </div>
-                </div>
 
-                <div className="row">
-                  <div className="col-md-6">
-                    <label>Topic Name:</label>
-                    <input
-                      type="text"
-                      name="topicName"
-                      className="form-control"
-                      value={formData.topicName}
-                      onChange={handleChange}
-                      required
-                    />
+                  <div className="row">
+                    <div className="col-md-6">
+                      <label>Topic Name:</label>
+                      <input
+                        type="text"
+                        name="topicName"
+                        className="form-control"
+                        value={formData.topicName}
+                        onChange={handleChange}
+                        required
+                      />
+                    </div>
+                    <div className="col-md-6">
+                      <label>Syllabus:</label>
+                      <input
+                        type="text"
+                        name="syllabus"
+                        className="form-control"
+                        value={formData.syllabus}
+                        onChange={handleChange}
+                        required
+                      />
+                    </div>
                   </div>
-                  <div className="col-md-6">
-                    <label>Syllabus:</label>
-                    <input
-                      type="text"
-                      name="syllabus"
-                      className="form-control"
-                      value={formData.syllabus}
-                      onChange={handleChange}
-                      required
-                    />
-                  </div>
-                </div>
 
-                <div className="row">
-                  <div className="col-md-12">
-                    <label>Link:</label>
-                    <input
-                      type="url"
-                      name="link"
-                      className="form-control"
-                      value={formData.link}
-                      onChange={handleChange}
-                      required
-                    />
+                  <div className="row">
+                    <div className="col-md-12">
+                      <label>Link:</label>
+                      <input
+                        type="url"
+                        name="link"
+                        className="form-control"
+                        value={formData.link}
+                        onChange={handleChange}
+                        required
+                      />
+                    </div>
                   </div>
-                </div>
 
-                <div className="form-buttons">
-                  <button type="submit" className="btn btn-success">
-                    Submit
-                  </button>
-                  <button
-                    type="button"
-                    className="btn btn-danger"
-                    onClick={() => setShowForm(false)}
-                  >
-                    Cancel
-                  </button>
-                </div>
-              </>
-            )}
-          </form>
+                  <div className="form-buttons">
+                    <button type="submit" className="btn btn-success">
+                      Submit
+                    </button>
+                    <button
+                      type="button"
+                      className="btn btn-danger"
+                      onClick={() => setShowModal(false)}
+                    >
+                      Cancel
+                    </button>
+                  </div>
+                </>
+              )}
+            </form>
+          </div>
         </div>
       )}
 
